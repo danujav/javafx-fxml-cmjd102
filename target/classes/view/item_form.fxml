@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stockmanage102.controller.ItemFormController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stockmanage102.controller.ItemFormController">
    <children>
       <Label layoutX="207.0" layoutY="29.0" text="Item Manage">
          <font>
@@ -24,6 +24,11 @@
          </cursor>
       </Button>
       <Button layoutX="384.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #95a5a6;" text="Clear">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button layoutX="27.0" layoutY="29.0" mnemonicParsing="false" onAction="#btnBackOnAction" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #9b59b6;" text="Back">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
