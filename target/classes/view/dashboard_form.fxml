@@ -5,9 +5,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane fx:id="rootNode" prefHeight="493.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stockmanage102.controller.DashboardFormController">
    <children>
@@ -16,15 +17,29 @@
             <Font name="System Bold" size="21.0" />
          </font>
       </Label>
-      <Button layoutX="199.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="53.0" prefWidth="103.0" style="-fx-background-color: #1abc9c;" text="Customer">
+      <Button layoutX="199.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="53.0" prefWidth="129.0" style="-fx-background-color: #1abc9c;" text="Customer">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/customer.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
-      <Button layoutX="349.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="53.0" prefWidth="103.0" style="-fx-background-color: #2ecc71;" text="Item">
+      <Button layoutX="349.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="53.0" prefWidth="129.0" style="-fx-background-color: #2ecc71;" text="Item">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/item.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
       <Button layoutX="518.0" layoutY="101.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="53.0" prefWidth="103.0" style="-fx-background-color: #3498db;" text="Supplier">
          <cursor>

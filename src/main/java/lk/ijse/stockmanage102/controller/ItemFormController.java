@@ -25,6 +25,6 @@ public class ItemFormController {
         Stage stage = (Stage) this.root.getScene().getWindow();
         stage.setScene(scene);
 
-        stage.setTitle("Dashboard");
+        stage.setTitle("Dashboard");  
     }
 }
