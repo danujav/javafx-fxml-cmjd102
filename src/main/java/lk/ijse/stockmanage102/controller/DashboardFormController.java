@@ -17,6 +17,7 @@ import java.io.IOException;
 public class DashboardFormController {
 
     public AnchorPane rootNode;
+    public AnchorPane node;
 
     public void btnCustomerOnAction(ActionEvent actionEvent) throws IOException {
         //open the Customer Manage form
@@ -41,5 +42,13 @@ public class DashboardFormController {
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Item Manage");
+    }
+
+    public void btnSupplierOnAction(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(this.getClass().getResource("/view/supplier_form.fxml"));
+
+        this.node.getChildren().clear();
+        this.node.getChildren().add(root);
+
     }
 }
