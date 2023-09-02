@@ -18,12 +18,12 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_form.fxml"));
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/login_form.fxml"));
 
         Scene scene = new Scene(rootNode);
 
         stage.setScene(scene);
-        stage.setTitle("Dashboard");
+        stage.setTitle("Login Form");
         stage.centerOnScreen();
 
         stage.show();
