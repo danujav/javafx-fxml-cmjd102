@@ -14,7 +14,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField fx:id="txtId" layoutX="27.0" layoutY="106.0" prefHeight="30.0" prefWidth="246.0" promptText="customer id" />
+      <TextField fx:id="txtId" layoutX="27.0" layoutY="106.0" onAction="#txtIdOnAction" prefHeight="30.0" prefWidth="246.0" promptText="customer id" />
       <TextField fx:id="txtName" layoutX="311.0" layoutY="106.0" prefHeight="30.0" prefWidth="246.0" promptText="customer name" />
       <TextField fx:id="txtAddress" layoutX="27.0" layoutY="185.0" prefHeight="30.0" prefWidth="246.0" promptText="customer address" />
       <TextField fx:id="txtTel" layoutX="311.0" layoutY="185.0" prefHeight="30.0" prefWidth="246.0" promptText="customer tel" />
@@ -23,7 +23,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="384.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #95a5a6;" text="Clear">
+      <Button layoutX="384.0" layoutY="241.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #95a5a6;" text="Clear">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>

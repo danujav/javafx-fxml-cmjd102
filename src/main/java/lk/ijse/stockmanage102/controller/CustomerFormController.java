@@ -12,6 +12,7 @@ import lk.ijse.stockmanage102.db.DbConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CustomerFormController {
@@ -40,6 +41,7 @@ public class CustomerFormController {
             boolean isSaved = pstm.executeUpdate() > 0;
 
             if(isSaved) {
+                clearFields();
                 new Alert(Alert.AlertType.CONFIRMATION, "customer saved!").show();
             }
 
@@ -48,5 +50,52 @@ public class CustomerFormController {
         }
 
 
+    }
+
+    private void clearFields() {
+        txtId.setText("");
+        txtName.setText("");
+        txtAddress.setText("");
+        txtTel.setText("");
+    }
+
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        clearFields();
+    }
+
+    public void txtIdOnAction(ActionEvent actionEvent) {
+        String id = txtId.getText();
+
+        try {
+            Connection con = DbConnection.getInstance().getConnection();
+
+            String sql = "SELECT * FROM customer WHERE id=?";
+
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, id);
+
+            ResultSet resultSet = pstm.executeQuery();
+
+            if(resultSet.next()) {
+                String txtId = resultSet.getString(1);
+                String txtName = resultSet.getString(2);
+                String txtAddress = resultSet.getString(3);
+                String txtTel = resultSet.getString(4);
+
+                setFields(txtId, txtName, txtAddress, txtTel);
+            } else {
+                new Alert(Alert.AlertType.WARNING, "customer not found!").show();
+            }
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void setFields(String txtId, String txtName, String txtAddress, String txtTel) {
+        this.txtId.setText(txtId);
+        this.txtName.setText(txtName);
+        this.txtAddress.setText(txtAddress);
+        this.txtTel.setText(txtTel);
     }
 }
