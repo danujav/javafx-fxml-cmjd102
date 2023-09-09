@@ -10,3 +10,10 @@ create table customer(
     address text not null,
     tel varchar(15) not null
 );
+
+create table item(
+    code varchar(15) primary key,
+    description text not null,
+    unit_price double not null,
+    qty_on_hand int not null
+);
