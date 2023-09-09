@@ -1,6 +1,6 @@
-drop database kade;
+drop database if exists kade;
 
-create database kade;
+create database if not exists kade;
 
 use kade;
 
