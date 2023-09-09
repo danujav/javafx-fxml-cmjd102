@@ -5,6 +5,8 @@ package lk.ijse.stockmanage102.controller;
     @created 9/2/23 - 1:27 PM   
 */
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,10 +16,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.stockmanage102.db.DbConnection;
 import lk.ijse.stockmanage102.dto.Item;
+import lk.ijse.stockmanage102.dto.tm.ItemTm;
 
 import java.io.IOException;
 import java.sql.*;
@@ -51,15 +55,35 @@ public class ItemFormController {
     private TableColumn<?, ?> colUnitPrice;
 
     @FXML
-    private TableView<?> tblItem;
+    private TableView<ItemTm> tblItem;
 
     public void initialize() throws SQLException {
         System.out.println("Item Form Just Loaded!");
 
-        loadAllItems();
+        setCellValueFactory();
+        List<Item> itemList = loadAllItems();
+
+        setTableData(itemList);
     }
 
-    private void loadAllItems() throws SQLException {
+    private void setTableData(List<Item> itemList) {
+        ObservableList<ItemTm> obList = FXCollections.observableArrayList();
+
+        for(Item item : itemList) {
+            var tm = new ItemTm(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand());
+            obList.add(tm);
+        }
+        tblItem.setItems(obList);
+    }
+
+    private void setCellValueFactory() {
+        colCode.setCellValueFactory(new PropertyValueFactory<>("code"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("unitPrice"));
+        colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
+    }
+
+    private List<Item> loadAllItems() throws SQLException {
         Connection con = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM item";
@@ -69,7 +93,7 @@ public class ItemFormController {
 
         List<Item> itemList = new ArrayList<>();
 
-        while(resultSet.next()) {
+        while (resultSet.next()) {
             String code = resultSet.getString(1);
             String description = resultSet.getString(2);
             double unitPrice = resultSet.getDouble(3);
@@ -79,9 +103,7 @@ public class ItemFormController {
             itemList.add(item);
         }
 
-        for(Item item : itemList) {
-            System.out.println(item);
-        }
+        return itemList;
     }
 
     @FXML
@@ -102,7 +124,7 @@ public class ItemFormController {
             pstm.setInt(4, qtyOnHand);
 
             boolean isSaved = pstm.executeUpdate() > 0;
-            if(isSaved) {
+            if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "item saved!").show();
             }
 
@@ -127,7 +149,7 @@ public class ItemFormController {
 
             ResultSet resultSet = pstm.executeQuery();
 
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 String itemCode = resultSet.getString(1);
                 String itemDescription = resultSet.getString(2);
                 double itemUnitPrice = resultSet.getDouble(3);
