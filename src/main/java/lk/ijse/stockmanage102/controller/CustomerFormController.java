@@ -125,4 +125,25 @@ public class CustomerFormController {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
     }
+
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+        String id = txtId.getText();
+
+        try {
+            Connection con = DbConnection.getInstance().getConnection();
+
+            String sql = "DELETE FROM customer WHERE id = ?";
+
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, id);
+
+            boolean isDeleted = pstm.executeUpdate() > 0;
+            if(isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "customer deleted!").show();
+            }
+
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.CONFIRMATION, e.getMessage()).show();
+        }
+    }
 }
