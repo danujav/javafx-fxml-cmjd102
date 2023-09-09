@@ -18,10 +18,9 @@ import lk.ijse.stockmanage102.db.DbConnection;
 import lk.ijse.stockmanage102.dto.Item;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemFormController {
     public AnchorPane root;
@@ -36,6 +35,37 @@ public class ItemFormController {
 
     @FXML
     private TextField txtUnitPrice;
+
+    public void initialize() throws SQLException {
+        System.out.println("Item Form Just Loaded!");
+
+        loadAllItems();
+    }
+
+    private void loadAllItems() throws SQLException {
+        Connection con = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM item";
+        Statement stm = con.createStatement();
+
+        ResultSet resultSet = stm.executeQuery(sql);
+
+        List<Item> itemList = new ArrayList<>();
+
+        while(resultSet.next()) {
+            String code = resultSet.getString(1);
+            String description = resultSet.getString(2);
+            double unitPrice = resultSet.getDouble(3);
+            int qtyOnHand = resultSet.getInt(4);
+
+            var item = new Item(code, description, unitPrice, qtyOnHand);
+            itemList.add(item);
+        }
+
+        for(Item item : itemList) {
+            System.out.println(item);
+        }
+    }
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
