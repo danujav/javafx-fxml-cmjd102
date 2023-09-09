@@ -98,4 +98,31 @@ public class CustomerFormController {
         this.txtAddress.setText(txtAddress);
         this.txtTel.setText(txtTel);
     }
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        String id = txtId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String tel = txtTel.getText();
+
+        try {
+            Connection con = DbConnection.getInstance().getConnection();
+
+            String sql = "UPDATE customer SET name = ?, address = ?, tel = ? WHERE id = ?";
+
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, name);
+            pstm.setString(2, address);
+            pstm.setString(3, tel);
+            pstm.setString(4, id);
+
+            boolean isUpdated = pstm.executeUpdate() > 0;
+            if(isUpdated) {
+                clearFields();
+                new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
 }
