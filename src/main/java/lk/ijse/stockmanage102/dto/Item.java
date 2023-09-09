@@ -5,12 +5,21 @@ package lk.ijse.stockmanage102.dto;
     @created 9/9/23 - 4:14 PM   
 */
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Item {
     private String code;
     private String description;
     private double unitPrice;
     private int qtyOnHand;
 
+    /*
     public Item() {
     }
 
@@ -61,5 +70,5 @@ public class Item {
                 ", unitPrice=" + unitPrice +
                 ", qtyOnHand=" + qtyOnHand +
                 '}';
-    }
+    }*/
 }
