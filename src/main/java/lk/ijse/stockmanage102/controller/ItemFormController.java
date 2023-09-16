@@ -72,9 +72,13 @@ public class ItemFormController {
     }
 
     private void setSupplierIds(List<SupplierDto> supplierDtos) {
-        for  (SupplierDto supplier : supplierDtos) {
-            System.out.println(supplier);
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        for  (SupplierDto supplierDto : supplierDtos) {
+            obList.add(supplierDto.getSupplierId());
         }
+
+        cmbSupplierId.setItems(obList);
     }
 
     private List<SupplierDto> loadAllSupplierIds() {
