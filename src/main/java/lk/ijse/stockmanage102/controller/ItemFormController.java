@@ -12,15 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.stockmanage102.db.DbConnection;
 import lk.ijse.stockmanage102.dto.Item;
+import lk.ijse.stockmanage102.dto.SupplierDto;
 import lk.ijse.stockmanage102.dto.tm.ItemTm;
 
 import java.io.IOException;
@@ -30,6 +28,10 @@ import java.util.List;
 
 public class ItemFormController {
     public AnchorPane root;
+    public ComboBox cmbSupplierId;
+    public TextField txtSupplierName;
+    public TextField txtShop;
+    public TextField txtSupplierTel;
     @FXML
     private TextField txtCode;
 
@@ -60,10 +62,43 @@ public class ItemFormController {
     public void initialize() throws SQLException {
         System.out.println("Item Form Just Loaded!");
 
+        List<SupplierDto> supplierDtos = loadAllSupplierIds();
+        setSupplierIds(supplierDtos);
+
         setCellValueFactory();
         List<Item> itemList = loadAllItems();
 
         setTableData(itemList);
+    }
+
+    private void setSupplierIds(List<SupplierDto> supplierDtos) {
+        for  (SupplierDto supplier : supplierDtos) {
+            System.out.println(supplier);
+        }
+    }
+
+    private List<SupplierDto> loadAllSupplierIds() {
+        List<SupplierDto> supplierList = new ArrayList<>();
+
+        try {
+            Connection con = DbConnection.getInstance().getConnection();
+            String sql = "SELECT * FROM supplier";
+
+            PreparedStatement pstm = con.prepareStatement(sql);
+            ResultSet resultSet = pstm.executeQuery();
+
+            while(resultSet.next()) {
+                supplierList.add(new SupplierDto(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)
+                ));
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+        return supplierList;
     }
 
     private void setTableData(List<Item> itemList) {
