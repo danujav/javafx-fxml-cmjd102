@@ -14,11 +14,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TextField layoutX="27.0" layoutY="106.0" prefHeight="30.0" prefWidth="246.0" promptText="Supplier ID" />
-      <TextField layoutX="311.0" layoutY="106.0" prefHeight="30.0" prefWidth="246.0" promptText="name" />
-      <TextField layoutX="27.0" layoutY="185.0" prefHeight="30.0" prefWidth="246.0" promptText="Shop" />
-      <TextField layoutX="311.0" layoutY="185.0" prefHeight="30.0" prefWidth="246.0" promptText="tel" />
-      <Button layoutX="476.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #3498db;" text="Save">
+      <TextField fx:id="txtId" layoutX="27.0" layoutY="106.0" prefHeight="30.0" prefWidth="246.0" promptText="Supplier ID" />
+      <TextField fx:id="txtName" layoutX="311.0" layoutY="106.0" prefHeight="30.0" prefWidth="246.0" promptText="name" />
+      <TextField fx:id="txtShop" layoutX="27.0" layoutY="185.0" prefHeight="30.0" prefWidth="246.0" promptText="Shop" />
+      <TextField fx:id="txtTel" layoutX="311.0" layoutY="185.0" prefHeight="30.0" prefWidth="246.0" promptText="tel" />
+      <Button onAction="#btnSaveOnAction" layoutX="476.0" layoutY="241.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="69.0" style="-fx-background-color: #3498db;" text="Save">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
