@@ -223,4 +223,40 @@ public class ItemFormController {
 
         stage.setTitle("Dashboard");
     }
+
+    @FXML
+    void cmbSupplierIdOnAction(ActionEvent event) {
+        String supplierId = String.valueOf(cmbSupplierId.getValue());
+
+        try {
+            Connection con = DbConnection.getInstance().getConnection();
+            String sql = "SELECT * FROM supplier WHERE supplierId = ?";
+
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setString(1, supplierId);
+
+            ResultSet resultSet = pstm.executeQuery();
+
+            if(resultSet.next()) {
+                var supplierDto = new SupplierDto(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)
+                );
+
+                fillSupplierFields(supplierDto);
+            } else {
+                new Alert(Alert.AlertType.INFORMATION, "oops! supplier didn't find!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    private void fillSupplierFields(SupplierDto supplierDto) {
+        txtSupplierName.setText(supplierDto.getName());
+        txtShop.setText(supplierDto.getShop());
+        txtSupplierTel.setText(supplierDto.getTel());
+    }
 }

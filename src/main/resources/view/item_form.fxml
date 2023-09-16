@@ -44,7 +44,7 @@
             <TableColumn fx:id="colQtyOnHand" prefWidth="134.0" text="Quntity On Hand" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cmbSupplierId" layoutX="31.0" layoutY="86.0" prefHeight="30.0" prefWidth="246.0" />
+      <ComboBox onAction="#cmbSupplierIdOnAction" fx:id="cmbSupplierId" layoutX="31.0" layoutY="86.0" prefHeight="30.0" prefWidth="246.0" />
       <TextField fx:id="txtSupplierName" layoutX="315.0" layoutY="86.0" prefHeight="30.0" prefWidth="246.0" promptText="Supplier Name" />
       <TextField fx:id="txtShop" layoutX="31.0" layoutY="152.0" prefHeight="30.0" prefWidth="246.0" promptText="Supplier Shop" />
       <TextField fx:id="txtSupplierTel" layoutX="315.0" layoutY="152.0" prefHeight="30.0" prefWidth="246.0" promptText="Supplier Telephone" />
